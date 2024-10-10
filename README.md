@@ -17,10 +17,8 @@ The python version used for this project is 3.12. Install python-3.12 and create
 
 Note: Additional PATH setup will need to be done for Windows and Mac. Please view
 
-
 - Mac (https://www.xda-developers.com/how-add-python-path-macos/)
 - Windows (https://realpython.com/add-python-to-path/)
-
 
 #### Project Setup
 
@@ -41,6 +39,7 @@ venv\Scripts\Activate.ps1
 ```
 
 ##### Install the Libraries
+
 ```
 pip install -r requirements.txt
 ```
@@ -53,15 +52,13 @@ Futher instructions are available at
 
 - CycleGAN (https://colab.research.google.com/drive/1B0BOel2-7J21biXe6FTz6W1SOhL23SkF?usp=sharing)
 
-- CUT 
+- CUT (https://colab.research.google.com/drive/15oEKboltISfjUXMDGvCjqU-64tPsf-lR?usp=sharing)
 
 Note that the commands present in the colab notebooks can also be adapted to any system. Windows users might need to follow https://learn.microsoft.com/en-us/windows/ai/windows-ml/tutorials/pytorch-installation.
-
 
 #### Training the colourizer network
 
 The paired dataset is located at [link](https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/colourization-dataset-v2.zip). When extracted, there will be a `human` and a `statue` folder. These needs to be referenced in an .env file. Use the `.env.example` file as a reference for your `.env` file and write as follows.
-
 
 ```
 # path to the statue folder
@@ -81,9 +78,10 @@ N.B: The compute requirements might be too high. Run on Colab instead
 
 ## Evaluation
 
-The project contains three pre-trained models located at `colourizer/models`. 
+The project contains three pre-trained models located at `colourizer/models`.
 
 If cloned from github, download the models from
+
 - https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/AutoEncoder+Models/colorizer-clean.keras
 - https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/AutoEncoder+Models/colorizer-noisy.keras
 - https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/AutoEncoder+Models/colorizer-v3.keras
@@ -107,8 +105,16 @@ python colourizer/evaluate.py --path <path-to-image>
 This will output a colourized statue in your previously defined `RESULTS` folder.
 
 ## References / Sources
+
 - https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
 - https://github.com/taesungp/contrastive-unpaired-translation
 - https://github.com/LS4GAN/uvcgan2
 - https://github.com/cyclomon/UNSB
 - https://www.kaggle.com/code/theblackmamba31/autoencoder-grayscale-to-color-image
+
+## Data Sources
+
+- Greek Sculptures (https://www.kaggle.com/datasets/thatgeeman/sculptures-of-greek-olympians-dataset)
+- Human-FFHQ (https://www.kaggle.com/datasets/arnaud58/flickrfaceshq-dataset-ffhq?resource=download)
+- Celeba_HQ (https://www.kaggle.com/datasets/badasstechie/celebahq-resized-256x256)
+- Midjourney (https://www.midjourney.com/)
