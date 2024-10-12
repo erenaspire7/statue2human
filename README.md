@@ -114,6 +114,52 @@ python colourizer/evaluate.py --path <path-to-image>
 
 This will output a colourized statue in your previously defined `RESULTS` folder.
 
+#### CycleGAN evaluation
+
+Download the repo from https://github.com/erenaspire7/pytorch-CycleGAN-and-pix2pix and setup a virtual environement as shown in [link](#setup).
+
+Download the pre-trained model at https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/CycleGAN/checkpoints.zip and unzip into the downloaded repo.
+
+Within the repo, run this command for a single image
+
+```
+!python scripts/transform.py --name statue2human \
+	--single_image --image_path /content/image.jpg --AtoB true \
+	--results_path <folder-path>
+```
+
+and the command below for transforming multiple images. Note (A) refers to a statue, and (B) refers to a human, hence negating the param performs human2statue
+
+```
+!python scripts/transform.py --name statue2human \
+	--multiple_images --image_dir /home/erenaspire7/repos/honours-project/pytorch-CycleGAN-and-pix2pix/statue-data --AtoB true \
+	--results_path <folder-path>
+```
+
+#### CUT evaluation
+
+Download the repo from https://github.com/erenaspire7/contrastive-unpaired-translation and setup a virtual environement as shown in [link](#setup).
+
+Download the pre-trained model at https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/CUT-model/pretrained_checkpoints.zip and unzip into the downloaded repo.
+
+Within the repo, run this command for a single image
+
+```
+!python transform.py --name statue2human_CUT \
+	--load_size 256 \
+	--single_image --image_path /content/image.jpg \
+	--results_path <folder-path>
+```
+
+and the command below for transforming multiple images.
+
+```
+!python transform.py --name statue2human_CUT \
+	--load_size 256 \
+	--multiple_images --image_dir /content/images \
+	--results_path <folder-path>
+```
+
 ## References / Sources
 
 - https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
