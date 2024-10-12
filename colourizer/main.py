@@ -104,5 +104,7 @@ model.compile(
     metrics=["acc"],
 )
 
-model.fit(statue_tensor, human_tensor, epochs=50, batch_size=50, verbose=1)
+batch_size = int(os.getenv("BATCH_SIZE"))
+
+model.fit(statue_tensor, human_tensor, epochs=50, batch_size=batch_size, verbose=1)
 model.save("colourizer.keras")
