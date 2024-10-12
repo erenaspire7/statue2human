@@ -4,7 +4,7 @@ from tqdm import tqdm
 from dotenv import load_dotenv
 from keras.api import layers, models, Model, optimizers
 from keras.api.preprocessing.image import img_to_array
-
+from sklearn.model_selection import train_test_split
 
 load_dotenv()
 
@@ -94,6 +94,9 @@ human_dataset = load_dataset(os.getenv("HUMAN_PATH"))
 statue_tensor = np.reshape(statue_dataset, (len(statue_dataset), SIZE, SIZE, 3))
 human_tensor = np.reshape(human_dataset, (len(human_dataset), SIZE, SIZE, 3))
 
+statue_train, statue_test = train_test_split(statue_tensor, test_size=0.2, random_state=42)
+human_train, human_test = train_test_split(human_tensor, test_size=0.2, random_state=42)
+
 BASE_FEATURES = 128
 LOW_RES = 64
 HIGH_RES = 256
@@ -111,5 +114,6 @@ model.compile(
 
 batch_size = int(os.getenv("BATCH_SIZE"))
 
-model.fit(statue_tensor, human_tensor, epochs=50, batch_size=batch_size, verbose=1)
+model.fit(statue_train, human_tensor, epochs=50, batch_size=batch_size, verbose=1)
+model.evaluate(statue_test,human_test)
 model.save("colourizer.keras")
