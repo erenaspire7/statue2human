@@ -58,33 +58,34 @@ def up(filters, kernel_size, dropout=True):
     return upsample
 
 
-def colourizer_model():
+def base_model(filter_base):
     inputs = layers.Input(shape=[SIZE, SIZE, 3])
 
-    d1 = down(128, (3, 3), False)(inputs)
-    d2 = down(128, (3, 3), False)(d1)
-    d3 = down(256, (3, 3), True)(d2)
-    d4 = down(512, (3, 3), True)(d3)
+    d1 = down(filter_base, (3, 3), False)(inputs)
+    d2 = down(filter_base, (3, 3), False)(d1)
+    d3 = down(filter_base * 2, (3, 3), True)(d2)
+    d4 = down(filter_base * 4, (3, 3), True)(d3)
 
-    d5 = down(512, (3, 3), True)(d4)
+    d5 = down(filter_base * 4, (3, 3), True)(d4)
 
-    u1 = up(512, (3, 3), False)(d5)
+    # upsampling
+    u1 = up(filter_base * 4, (3, 3), False)(d5)
     u1 = layers.concatenate([u1, d4])
 
-    u2 = up(256, (3, 3), False)(u1)
+    u2 = up(filter_base * 2, (3, 3), False)(u1)
     u2 = layers.concatenate([u2, d3])
 
-    u3 = up(128, (3, 3), False)(u2)
+    u3 = up(filter_base, (3, 3), False)(u2)
     u3 = layers.concatenate([u3, d2])
 
-    u4 = up(128, (3, 3), False)(u3)
+    u4 = up(filter_base, (3, 3), False)(u3)
     u4 = layers.concatenate([u4, d1])
 
     u5 = up(3, (3, 3), False)(u4)
     u5 = layers.concatenate([u5, inputs])
 
     output = layers.Conv2D(3, (2, 2), strides=1, padding="same")(u5)
-    return Model(inputs=inputs, outputs=output)
+    return tf.keras.Model(inputs=inputs, outputs=output)
 
 
 statue_dataset = load_dataset(os.getenv("STATUE_PATH"), False)
@@ -93,8 +94,12 @@ human_dataset = load_dataset(os.getenv("HUMAN_PATH"))
 statue_tensor = np.reshape(human_dataset, (len(human_dataset), SIZE, SIZE, 3))
 human_tensor = np.reshape(human_dataset, (len(human_dataset), SIZE, SIZE, 3))
 
+BASE_FEATURES = 128
+LOW_RES = 64
+HIGH_RES = 256
 
-model = colourizer_model()
+# replace constant with above to tweak feature resolution
+model = base_model(BASE_FEATURES)
 model.summary()
 
 
