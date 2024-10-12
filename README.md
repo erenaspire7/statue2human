@@ -116,9 +116,9 @@ This will output a colourized statue in your previously defined `RESULTS` folder
 
 #### CycleGAN evaluation
 
-Download the repo from https://github.com/erenaspire7/pytorch-CycleGAN-and-pix2pix and setup a virtual environement as shown in [link](#setup).
+Download / Clone the repo from https://github.com/erenaspire7/pytorch-CycleGAN-and-pix2pix and setup a virtual environement as shown in [link](#setup).
 
-Download the pre-trained model at https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/CycleGAN/checkpoints.zip and unzip into the downloaded repo.
+Then download the pre-trained model at https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/CycleGAN/checkpoints.zip and unzip into the downloaded repo.
 
 Within the repo, run this command for a single image
 
@@ -128,7 +128,9 @@ Within the repo, run this command for a single image
 	--results_path <folder-path>
 ```
 
-and the command below for transforming multiple images. Note (A) refers to a statue, and (B) refers to a human, hence negating the param performs human2statue
+and the command below for transforming multiple images.
+
+N.B: (A) refers to a statue, and (B) refers to a human, hence setting AtoB as false performs a human2statue transformation.
 
 ```
 !python scripts/transform.py --name statue2human \
