@@ -64,13 +64,13 @@ Note that the commands present in the colab notebooks can also be adapted to any
 
 #### Training the colourizer network
 
-The paired dataset is located at [link](https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/colourization-dataset-v2.zip). When extracted, there will be a `human` and a `statue` folder. These needs to be referenced in an .env file. Use the `.env.example` file as a reference for your `.env` file and write as follows.
+The paired dataset is located at [link](https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/colourization-dataset-v2.zip). When extracted, there will be a `human` and a `statue-v2` folder. These needs to be referenced in an .env file. Use the `.env.example` file as a reference for your `.env` file and write as follows.
 
 Make sure to change to path to reflect the absolute path location of the data.
 
 ```
 # path to the statue folder
-STATUE_PATH="/home/erenaspire7/repos/honours-project/keras-colorizer/data/statue"
+STATUE_PATH="/home/erenaspire7/repos/honours-project/keras-colorizer/data/statue-v2"
 
 # path to the human folder
 HUMAN_PATH="/home/erenaspire7/repos/honours-project/keras-colorizer/data/human"
