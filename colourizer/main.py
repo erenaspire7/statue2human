@@ -91,7 +91,7 @@ def base_model(filter_base):
 statue_dataset = load_dataset(os.getenv("STATUE_PATH"), False)
 human_dataset = load_dataset(os.getenv("HUMAN_PATH"))
 
-statue_tensor = np.reshape(statue_dataset, (len(human_dataset), SIZE, SIZE, 3))
+statue_tensor = np.reshape(statue_dataset, (len(statue_dataset), SIZE, SIZE, 3))
 human_tensor = np.reshape(human_dataset, (len(human_dataset), SIZE, SIZE, 3))
 
 BASE_FEATURES = 128
