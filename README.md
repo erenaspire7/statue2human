@@ -38,6 +38,12 @@ source venv/bin/activate
 venv\Scripts\Activate.ps1
 ```
 
+N.B: Windows might disable scripts by default, which will prevent the virtual environment from being activated. To rectify, run this command
+
+```
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+```
+
 ##### Install the Libraries
 
 ```
