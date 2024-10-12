@@ -66,12 +66,16 @@ Note that the commands present in the colab notebooks can also be adapted to any
 
 The paired dataset is located at [link](https://erenaspire7-gan-dataset.s3.eu-west-1.amazonaws.com/colourization-dataset-v2.zip). When extracted, there will be a `human` and a `statue` folder. These needs to be referenced in an .env file. Use the `.env.example` file as a reference for your `.env` file and write as follows.
 
+Make sure to change to path to reflect the absolute path location of the data.
+
 ```
 # path to the statue folder
 STATUE_PATH="/home/erenaspire7/repos/honours-project/keras-colorizer/data/statue"
 
 # path to the human folder
 HUMAN_PATH="/home/erenaspire7/repos/honours-project/keras-colorizer/data/human"
+
+BATCH_SIZE=50
 ```
 
 Then you can run the colourizer training script with
@@ -80,7 +84,7 @@ Then you can run the colourizer training script with
 python colourizer/main.py
 ```
 
-N.B: The compute requirements might be too high. Run on Colab instead
+N.B: The compute requirements might be too high during traing. Either reduce the `BATCH_SIZE` variable or Run on [Colab](https://colab.research.google.com/drive/1jvUo6M7xOgS-WApA_ohdYtIjC5JgnM31?usp=sharing) instead.
 
 ## Evaluation
 
