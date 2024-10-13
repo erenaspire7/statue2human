@@ -19,7 +19,7 @@ def sorted_alphanumeric(data):
     return sorted(data, key=alphanum_key)
 
 
-def load_dataset(path, yuv=True):
+def load_dataset(path):
     arr = []
 
     files = os.listdir(path)
@@ -27,10 +27,7 @@ def load_dataset(path, yuv=True):
 
     for i in tqdm(files):
         img = cv2.imread(path + "/" + i, 1)
-
-        if yuv:
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
-
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
         img = cv2.resize(img, (SIZE, SIZE))
         img = img.astype("float32") / 255.0
         arr.append(img_to_array(img))
@@ -94,9 +91,6 @@ human_dataset = load_dataset(os.getenv("HUMAN_PATH"))
 statue_tensor = np.reshape(statue_dataset, (len(statue_dataset), SIZE, SIZE, 3))
 human_tensor = np.reshape(human_dataset, (len(human_dataset), SIZE, SIZE, 3))
 
-statue_train, statue_test = train_test_split(statue_tensor, test_size=0.2, random_state=42)
-human_train, human_test = train_test_split(human_tensor, test_size=0.2, random_state=42)
-
 BASE_FEATURES = 128
 LOW_RES = 64
 HIGH_RES = 256
@@ -114,6 +108,5 @@ model.compile(
 
 batch_size = int(os.getenv("BATCH_SIZE"))
 
-model.fit(statue_train, human_tensor, epochs=50, batch_size=batch_size, verbose=1)
-model.evaluate(statue_test,human_test)
+model.fit(statue_tensor, human_tensor, epochs=50, batch_size=batch_size, verbose=1)
 model.save("colourizer.keras")
